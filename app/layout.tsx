@@ -4,7 +4,12 @@ import "@/app/_styles/globals.css";
 import Logo from "./_components/Logo";
 
 export const metadata = {
-  title: "The Wild Oasis",
+  title: {
+    template: "The wild Oasis | %s",
+    default: "Welcome to The Wild Oasis",
+  },
+  description:
+    "Luxury cabins nestled in nature, offering a serene escape with modern amenities and breathtaking views. ",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
