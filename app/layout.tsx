@@ -1,8 +1,7 @@
 import type { ReactNode } from "react";
-import Navigation from "@/app/_components/Navigation";
 import "@/app/_styles/globals.css";
-import Logo from "./_components/Logo";
 import { Josefin_Sans } from "next/font/google";
+import Header from "./_components/Header";
 
 export const metadata = {
   title: {
@@ -22,12 +21,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang='en'>
       <body
-        className={` ${josefinSans.className} text-gray-100 bg-primary-950 min-h-screen`}>
-        <header>
-          <Logo />
-          <Navigation />
-        </header>
-        <main>{children}</main>
+        className={` ${josefinSans.className} text-gray-100 bg-primary-950 min-h-screen flex flex-col `}>
+        <Header />
+        <div className='flex-1 px-8 py-12 '>
+          <main className='max-w-7xl mx-auto '>{children}</main>
+        </div>
       </body>
     </html>
   );
