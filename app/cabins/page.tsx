@@ -1,6 +1,10 @@
 import CabinCard from "@/app/_components/CabinCard";
 import { Cabin } from "./types";
 
+export const metadata = {
+  title: "Cabins",
+};
+
 export default function Page() {
   // CHANGE
   const cabins: Cabin[] = [];
