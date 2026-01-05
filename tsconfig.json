@@ -12,6 +12,8 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+     "noEmit": true, // or "emitDeclarationOnly": true
+    "allowImportingTsExtensions": true,
     "plugins": [
       {
         "name": "next"
