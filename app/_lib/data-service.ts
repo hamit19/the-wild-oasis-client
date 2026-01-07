@@ -2,8 +2,8 @@ import { eachDayOfInterval } from "date-fns";
 
 import { supabase } from "./supabase.js";
 import { Cabin } from "../cabins/types.js";
+import { notFound } from "next/navigation";
 
-/////////////
 // GET
 
 export async function getCabin(id: string): Promise<Cabin> {
@@ -13,11 +13,9 @@ export async function getCabin(id: string): Promise<Cabin> {
     .eq("id", id)
     .single();
 
-  // For testing
-  // await new Promise((res) => setTimeout(res, 1000));
-
   if (error) {
     console.error(error);
+    notFound();
   }
 
   return data;
