@@ -1,19 +1,23 @@
-import { useState } from 'react';
+"use client";
 
-function TextExpander({ children }) {
+import { useState } from "react";
+
+function TextExpander({ children }: { children: string }) {
   const [isExpanded, setIsExpanded] = useState(false);
+
   const displayText = isExpanded
     ? children
-    : children.split(' ').slice(0, 40).join(' ') + '...';
+    : children.substring(0, 200) + " ...";
+
+  // children?.split(" ").slice(0, 40).join(" ") + "..."
 
   return (
     <span>
-      {displayText}{' '}
+      {displayText}{" "}
       <button
         className='text-primary-700 border-b border-primary-700 leading-3 pb-1'
-        onClick={() => setIsExpanded(!isExpanded)}
-      >
-        {isExpanded ? 'Show less' : 'Show more'}
+        onClick={() => setIsExpanded(!isExpanded)}>
+        {isExpanded ? "Show less" : "Show more"}
       </button>
     </span>
   );

@@ -3,5 +3,5 @@ export const metadata = {
 };
 
 export default function Page() {
-  return <div> account Page</div>;
+  return <div> Welcome Hamid!</div>;
 }
