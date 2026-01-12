@@ -1,12 +1,25 @@
 import { Suspense } from "react";
 import CabinList from "../_components/CabinList";
 import Spinner from "../_components/Spinner";
+import Filter from "../_components/Filter";
+
+interface SearchParamsInterface {
+  capacity: "small" | "medium" | "large" | "all";
+}
+
+export type filterType = "small" | "medium" | "large" | "all";
 
 export const metadata = {
   title: "Cabins",
 };
 
-export default async function Page() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: SearchParamsInterface;
+}) {
+  const filter: filterType = searchParams?.capacity ?? "all";
+
   return (
     <div>
       <h1 className='text-4xl mb-5 text-accent-400 font-medium'>
@@ -21,8 +34,12 @@ export default async function Page() {
         to paradise.
       </p>
 
+      <div className='flex justify-end mb-8 '>
+        <Filter />
+      </div>
+
       <Suspense fallback={<Spinner />}>
-        <CabinList />
+        <CabinList filter={filter} />
       </Suspense>
     </div>
   );
