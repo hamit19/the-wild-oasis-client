@@ -2,12 +2,11 @@ import { Suspense } from "react";
 import CabinList from "../_components/CabinList";
 import Spinner from "../_components/Spinner";
 import Filter from "../_components/Filter";
+import { filterType } from "../_types/filterTypes";
 
 interface SearchParamsInterface {
   capacity: "small" | "medium" | "large" | "all";
 }
-
-export type filterType = "small" | "medium" | "large" | "all";
 
 export const metadata = {
   title: "Cabins",
