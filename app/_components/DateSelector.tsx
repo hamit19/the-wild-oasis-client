@@ -1,7 +1,7 @@
 "use client";
 
 import { isWithinInterval } from "date-fns";
-import { DayPicker } from "react-day-picker";
+import { DateRange, DayPicker, getDefaultClassNames } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { Cabin } from "../cabins/types";
 import { useState } from "react";
@@ -25,17 +25,12 @@ type DateSelectorPropsTypes = {
   cabin: Cabin;
 };
 
-type RangeStateType = {
-  from: Date | undefined;
-  to: Date | undefined;
-};
-
 function DateSelector({
   settings,
   bookedDates,
   cabin,
 }: DateSelectorPropsTypes) {
-  const [range, setRange] = useState<RangeStateType>({
+  const [range, setRange] = useState<DateRange>({
     from: undefined,
     to: undefined,
   });
@@ -49,11 +44,27 @@ function DateSelector({
   // SETTINGS
   const { minBookingLength, maxBookingLength } = settings;
 
+  console.log("YOOOOOOOOOO:", settings);
+
+  // const minBookingLength = 1;
+  // const maxBookingLength = 23;
+
+  const defaultClassNames = getDefaultClassNames();
+
   return (
     <div className='flex flex-col justify-between'>
       <DayPicker
-        className=' pt-12 flex w-full place-self-center flex-row '
+        classNames={{
+          root: `${defaultClassNames.root} pt-12 place-self-center text-sm`,
+          months: `flex flex-row gap-8`,
+          day: "m-0 p-0",
+          dropdown_root: `${defaultClassNames.dropdown_root} text-base `,
+          months_dropdown: "bg-primary-900",
+          years_dropdown: "bg-primary-900",
+          nav: "hidden",
+        }}
         mode='range'
+        required
         min={minBookingLength + 1}
         max={maxBookingLength}
         startMonth={new Date()}
@@ -63,7 +74,7 @@ function DateSelector({
         endMonth={new Date(Date.UTC(new Date().getFullYear() + 5))}
         captionLayout='dropdown'
         numberOfMonths={2}
-        onSelect={() => setRange}
+        onSelect={setRange}
         selected={range}
       />
 
