@@ -3,6 +3,7 @@ import CabinList from "../_components/CabinList";
 import Spinner from "../_components/Spinner";
 import Filter from "../_components/Filter";
 import { filterType } from "../_types/filterTypes";
+import ReservationReminder from "../_components/ReservationReminder";
 
 interface SearchParamsInterface {
   capacity: "small" | "medium" | "large" | "all";
@@ -39,6 +40,7 @@ export default async function Page({
 
       <Suspense fallback={<Spinner />} key={filter}>
         <CabinList filter={filter} />
+        <ReservationReminder />
       </Suspense>
     </div>
   );
