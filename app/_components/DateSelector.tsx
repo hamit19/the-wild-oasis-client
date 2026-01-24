@@ -11,7 +11,7 @@ function isAlreadyBooked(range, datesArr) {
     range.from &&
     range.to &&
     datesArr.some((date) =>
-      isWithinInterval(date, { start: range.from, end: range.to })
+      isWithinInterval(date, { start: range.from, end: range.to }),
     )
   );
 }
@@ -30,11 +30,6 @@ function DateSelector({
   bookedDates,
   cabin,
 }: DateSelectorPropsTypes) {
-  const [range, setRange] = useState<DateRange>({
-    from: undefined,
-    to: undefined,
-  });
-
   // CHANGE
   const regularPrice = 23;
   const discount = 23;
@@ -43,11 +38,6 @@ function DateSelector({
 
   // SETTINGS
   const { minBookingLength, maxBookingLength } = settings;
-
-  console.log("YOOOOOOOOOO:", settings);
-
-  // const minBookingLength = 1;
-  // const maxBookingLength = 23;
 
   const defaultClassNames = getDefaultClassNames();
 
