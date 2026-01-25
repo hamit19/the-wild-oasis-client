@@ -1,17 +1,11 @@
 "use client";
 
-import {
-  createContext,
-  ReactNode,
-  SetStateAction,
-  useContext,
-  useState,
-} from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 import { DateRange, OnSelectHandler } from "react-day-picker";
 
 interface ContextInterface {
   range: DateRange;
-  setRange?: OnSelectHandler<any>;
+  setRange?: OnSelectHandler<DateRange>;
   resetRange?: () => void;
 }
 
