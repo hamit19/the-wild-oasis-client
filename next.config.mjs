@@ -14,6 +14,12 @@ const nextConfig = {
         pathname: "/storage/v1/object/public/cabin-images/**",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+        pathname: "/**",
+        port: "",
+      },
     ],
   },
 };
