@@ -17,13 +17,13 @@ export default async function updateGuest(formData: FormData) {
   const nationalID = formData.get("nationalID");
   const [nationality, countryFlag] = formData?.get("nationality")?.split("%");
 
+  if (!/^[a-zA-Z0-9]{6,12}$/.test(nationalID))
+    throw new Error("invalid nationalID!");
+
+  if (!session) throw new Error("Please login first!");
+
   if (nationalID && nationality && countryFlag) {
     const updateGuest = { nationalID, nationality, countryFlag };
-
-    if (!session) throw new Error("Please login first!");
-
-    if (!/^[a-zA-Z0-9]{6,12}$/.test(nationalID))
-      throw new Error("invalid nationalID!");
 
     const { data, error } = await supabase
       .from("guests")
