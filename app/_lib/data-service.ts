@@ -124,8 +124,19 @@ export async function getBookedDatesByCabinId(cabinId: number) {
   return bookedDates;
 }
 
-export async function getSettings() {
+type Settings = {
+  id: number;
+  created_at: string;
+  minBookingLength: number;
+  maxBookingLength: number;
+  maxGustesPerBooking: number;
+  breakfastPrice: number;
+};
+
+export async function getSettings(): Promise<Settings> {
   const { data, error } = await supabase.from("settings").select("*").single();
+
+  console.log(data);
 
   if (error) {
     console.error(error);

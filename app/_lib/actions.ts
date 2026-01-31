@@ -63,3 +63,32 @@ export async function deleteReservation(bookingId: string) {
 
   if (error) throw new Error("Something went wrong deleting booking!");
 }
+
+export async function updateReservation(bookingId: string, formData: FormData) {
+  const session = await auth();
+
+  if (!session) throw new Error("Please login first!");
+
+  const guestsBookings = await getBookings(session.user?.id);
+
+  const guestsBookingIds = guestsBookings.map((booking) => booking.id);
+
+  if (!guestsBookingIds.includes(Number(bookingId)))
+    throw new Error("'403' Access denied!");
+
+  const numGuests = formData.get("numGuests");
+  const observations = formData.get("observations");
+
+  const updatedFields = { numGuests, observations };
+
+  const { data, error } = await supabase
+    .from("bookings")
+    .update(updatedFields)
+    .eq("id", bookingId)
+    .select()
+    .single();
+
+  if (error) throw new Error("Something went wrong updating booking!");
+
+  return data;
+}
