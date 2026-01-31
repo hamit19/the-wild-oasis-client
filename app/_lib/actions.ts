@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { auth, signIn, signOut } from "./auth";
 import { supabase } from "./supabase";
+import { getBookings } from "./data-service";
 
 export async function signInAction() {
   return await signIn("google", { redirectTo: "/account" });
@@ -40,4 +41,25 @@ export default async function updateGuest(formData: FormData) {
   } else {
     throw new Error("Please fill out all of the fields!");
   }
+}
+
+export async function deleteReservation(bookingId: string) {
+  const session = await auth();
+  if (!session) throw new Error("Please login first!");
+
+  const guestBookings = await getBookings(session.user?.id);
+
+  const guestsBookingIds = guestBookings.map((booking) => booking.id);
+
+  if (!guestsBookingIds.includes(bookingId))
+    throw new Error("'403' Access denied!");
+
+  const { data, error } = await supabase
+    .from("bookings")
+    .delete()
+    .eq("id", bookingId);
+
+  revalidatePath("/account/reservations");
+
+  if (error) throw new Error("Something went wrong deleting booking!");
 }
