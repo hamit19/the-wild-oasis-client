@@ -52,7 +52,7 @@ export async function deleteReservation(bookingId: string) {
 
   const guestsBookingIds = guestBookings.map((booking) => booking.id);
 
-  if (!guestsBookingIds.includes(bookingId))
+  if (!guestsBookingIds.includes(Number(bookingId)))
     throw new Error("'403' Access denied!");
 
   const { data, error } = await supabase
