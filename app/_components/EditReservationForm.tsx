@@ -2,6 +2,7 @@
 
 import { useFormStatus } from "react-dom";
 import { updateReservation } from "../_lib/actions";
+import SubmitButton from "./SubmitButton";
 
 type EditReservationFormProps = {
   maxCapacity: number;
@@ -55,21 +56,8 @@ export default function EditReservationForm({
       </div>
 
       <div className="flex justify-end items-center gap-6">
-        <Button />
+        <SubmitButton label="Update Reservation" pendingLabel="Updating..." />
       </div>
     </form>
-  );
-}
-
-function Button() {
-  const { pending } = useFormStatus();
-
-  return (
-    <button
-      disabled={pending}
-      className="bg-accent-500 px-8 py-4 text-primary-800 font-semibold hover:bg-accent-600 transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300"
-    >
-      {pending ? "Updating..." : "Update Reservation"}
-    </button>
   );
 }
