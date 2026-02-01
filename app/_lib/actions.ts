@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { auth, signIn, signOut } from "./auth";
 import { supabase } from "./supabase";
 import { getBookings } from "./data-service";
+import { redirect } from "next/navigation";
 
 export async function signInAction() {
   return await signIn("google", { redirectTo: "/account" });
@@ -81,7 +82,7 @@ export async function updateReservation(bookingId: string, formData: FormData) {
 
   const updatedFields = { numGuests, observations };
 
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from("bookings")
     .update(updatedFields)
     .eq("id", bookingId)
@@ -90,5 +91,9 @@ export async function updateReservation(bookingId: string, formData: FormData) {
 
   if (error) throw new Error("Something went wrong updating booking!");
 
-  return data;
+  revalidatePath(`/account/reservations/edit/${bookingId}`);
+
+  revalidatePath("/account/reservations");
+
+  redirect("/account/reservations");
 }

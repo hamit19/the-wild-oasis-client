@@ -4,15 +4,17 @@ import { useFormStatus } from "react-dom";
 import { updateReservation } from "../_lib/actions";
 
 type EditReservationFormProps = {
-  maxGustesPerBooking: number;
+  maxCapacity: number;
   bookingId: string;
-  booking: any;
+  numGuests: number;
+  observations: string;
 };
 
 export default function EditReservationForm({
-  maxGustesPerBooking,
+  maxCapacity,
   bookingId,
-  booking,
+  numGuests,
+  observations,
 }: EditReservationFormProps) {
   const handleEditReservation = updateReservation.bind(null, bookingId);
 
@@ -24,7 +26,7 @@ export default function EditReservationForm({
       <div className="space-y-2">
         <label htmlFor="numGuests">How many guests?</label>
         <select
-          defaultValue={booking.numGuests}
+          defaultValue={numGuests}
           name="numGuests"
           id="numGuests"
           className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
@@ -33,13 +35,11 @@ export default function EditReservationForm({
           <option value="" key="">
             Select number of guests...
           </option>
-          {Array.from({ length: maxGustesPerBooking }, (_, i) => i + 1).map(
-            (x) => (
-              <option value={x} key={x}>
-                {x} {x === 1 ? "guest" : "guests"}
-              </option>
-            ),
-          )}
+          {Array.from({ length: maxCapacity }, (_, i) => i + 1).map((x) => (
+            <option value={x} key={x}>
+              {x} {x === 1 ? "guest" : "guests"}
+            </option>
+          ))}
         </select>
       </div>
 
@@ -48,7 +48,7 @@ export default function EditReservationForm({
           Anything we should know about your stay?
         </label>
         <textarea
-          defaultValue={booking.observations}
+          defaultValue={observations}
           name="observations"
           className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
         />

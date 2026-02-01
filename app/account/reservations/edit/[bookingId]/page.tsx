@@ -1,5 +1,5 @@
 import EditReservationForm from "@/app/_components/EditReservationForm";
-import { getBooking, getSettings } from "@/app/_lib/data-service";
+import { getBooking, getCabin } from "@/app/_lib/data-service";
 
 export default async function Page({
   params,
@@ -8,12 +8,15 @@ export default async function Page({
 }) {
   const { bookingId } = params;
 
-  const [booking, settings] = await Promise.all([
-    getBooking(bookingId),
-    await getSettings(),
-  ]);
+  // const [booking, cabin] = await Promise.all([
+  //   getBooking(bookingId),
+  //   getCabin(bookingId),
+  // ]);
 
-  const { maxGustesPerBooking } = settings;
+  const { numGuests, observations, cabinId } = await getBooking(bookingId);
+  const cabin = await getCabin(cabinId);
+
+  const { maxCapacity } = cabin;
 
   return (
     <div>
@@ -21,9 +24,10 @@ export default async function Page({
         Edit Reservation #{bookingId}
       </h2>
       <EditReservationForm
-        maxGustesPerBooking={maxGustesPerBooking}
+        numGuests={numGuests}
+        observations={observations}
+        maxCapacity={maxCapacity}
         bookingId={bookingId}
-        booking={booking}
       />
     </div>
   );
