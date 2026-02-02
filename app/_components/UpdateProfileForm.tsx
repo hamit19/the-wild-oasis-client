@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode } from "react";
-import { guestType } from "../_types/filterTypes";
+import { guestType } from "../_types/types";
 import updateGuest from "../_lib/actions";
 import SubmitButton from "./SubmitButton";
 

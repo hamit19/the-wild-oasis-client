@@ -3,7 +3,7 @@ import { eachDayOfInterval } from "date-fns";
 import { supabase } from "./supabase.js";
 import { Cabin } from "../cabins/types.js";
 import { notFound } from "next/navigation";
-import { Booking } from "../_types/filterTypes.js";
+import { Booking } from "../_types/types.js";
 
 // GET
 

@@ -21,3 +21,12 @@ export type Booking = {
   created_at: string;
   cabins: { name: string; image: string }[];
 };
+
+export interface ReservationCardProps {
+  booking?: Booking;
+  onDelete: (bookingId: string) => void;
+}
+
+export interface ReservationDeleteProps extends ReservationCardProps {
+  bookingId: string;
+}

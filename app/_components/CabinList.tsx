@@ -2,7 +2,7 @@ import React from "react";
 import { getCabins } from "../_lib/data-service";
 import { Cabin } from "../cabins/types";
 import CabinCard from "./CabinCard";
-import { filterType } from "../_types/filterTypes";
+import { filterType } from "../_types/types";
 
 export default async function CabinList({ filter }: { filter: filterType }) {
   const cabins: Cabin[] = await getCabins();
@@ -14,7 +14,7 @@ export default async function CabinList({ filter }: { filter: filterType }) {
 
   if (filter === "medium")
     displayCabins = cabins.filter(
-      (cabin) => cabin.maxCapacity >= 4 && cabin.maxCapacity <= 7
+      (cabin) => cabin.maxCapacity >= 4 && cabin.maxCapacity <= 7,
     );
 
   if (filter === "large")
@@ -24,7 +24,7 @@ export default async function CabinList({ filter }: { filter: filterType }) {
 
   return (
     <div>
-      <div className='grid sm:grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 xl:gap-14'>
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 xl:gap-14">
         {displayCabins?.map((cabin) => (
           <CabinCard cabin={cabin} key={cabin.id} />
         ))}
