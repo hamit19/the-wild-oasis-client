@@ -1,3 +1,4 @@
+import { getCountryType, guestType, Settings } from "./../_types/types";
 import { eachDayOfInterval } from "date-fns";
 
 import { supabase } from "./supabase.js";
@@ -51,7 +52,7 @@ export const getCabins = async function (): Promise<Cabin[]> {
 };
 
 // Guests are uniquely identified by their email address
-export async function getGuest(email) {
+export async function getGuest(email: string): Promise<guestType | null> {
   const { data, error } = await supabase
     .from("guests")
     .select("*")
@@ -62,7 +63,7 @@ export async function getGuest(email) {
   return data;
 }
 
-export async function getBooking(id) {
+export async function getBooking(id: number): Promise<Booking> {
   const { data, error, count } = await supabase
     .from("bookings")
     .select("*")
@@ -125,15 +126,6 @@ export async function getBookedDatesByCabinId(cabinId: number) {
   return bookedDates;
 }
 
-type Settings = {
-  id: number;
-  created_at: string;
-  minBookingLength: number;
-  maxBookingLength: number;
-  maxGustesPerBooking: number;
-  breakfastPrice: number;
-};
-
 export async function getSettings(): Promise<Settings> {
   const { data, error } = await supabase.from("settings").select("*").single();
 
@@ -147,12 +139,6 @@ export async function getSettings(): Promise<Settings> {
   return data;
 }
 
-export type getCountryType = {
-  name: string;
-  flag: string;
-  independent: boolean;
-};
-
 export async function getCountries(): Promise<getCountryType[]> {
   try {
     const res = await fetch(
@@ -164,9 +150,6 @@ export async function getCountries(): Promise<getCountryType[]> {
     throw new Error("Could not fetch countries");
   }
 }
-
-/////////////
-// CREATE
 
 export async function createGuest(newGuest) {
   const { data, error } = await supabase.from("guests").insert([newGuest]);

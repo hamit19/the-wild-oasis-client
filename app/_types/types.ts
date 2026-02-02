@@ -30,3 +30,18 @@ export interface ReservationCardProps {
 export interface ReservationDeleteProps extends ReservationCardProps {
   bookingId: string;
 }
+
+export type getCountryType = {
+  name: string;
+  flag: string;
+  independent: boolean;
+};
+
+export type Settings = {
+  id: number;
+  created_at: string;
+  minBookingLength: number;
+  maxBookingLength: number;
+  maxGustesPerBooking: number;
+  breakfastPrice: number;
+};
