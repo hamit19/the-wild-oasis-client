@@ -10,20 +10,20 @@ export type guestType = {
 };
 
 export type Booking = {
-  id: number;
-  guestId: number;
-  cabinId: number;
-  startDate: string;
-  endDate: string;
-  numNights: number;
-  totalPrice: number;
-  numGuests: number;
-  created_at: string;
-  cabins: { name: string; image: string }[];
+  id?: number;
+  guestId?: number;
+  cabinId?: number;
+  startDate?: Date;
+  endDate?: Date;
+  numNights?: number;
+  totalPrice?: number;
+  numGuests?: number;
+  created_at?: string;
+  cabins?: { name: string; image: string }[];
 };
 
 export interface ReservationCardProps {
-  booking?: Booking;
+  booking: Booking;
   onDelete: (bookingId: string) => void;
 }
 

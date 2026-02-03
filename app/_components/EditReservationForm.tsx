@@ -1,6 +1,6 @@
 "use client";
 
-import { updateReservation } from "../_lib/actions";
+import { updateBooking } from "../_lib/actions";
 import SubmitButton from "./SubmitButton";
 
 type EditReservationFormProps = {
@@ -16,7 +16,7 @@ export default function EditReservationForm({
   numGuests,
   observations,
 }: EditReservationFormProps) {
-  const handleEditReservation = updateReservation.bind(null, bookingId);
+  const handleEditReservation = updateBooking.bind(null, bookingId);
 
   return (
     <form

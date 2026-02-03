@@ -23,7 +23,12 @@ export async function getCabin(id: string): Promise<Cabin> {
   return data;
 }
 
-export async function getCabinPrice(id) {
+type CabinPrice = {
+  regularPrice: number;
+  discount: number;
+};
+
+export async function getCabinPrice(id: number): Promise<CabinPrice | null> {
   const { data, error } = await supabase
     .from("cabins")
     .select("regularPrice, discount")

@@ -5,6 +5,7 @@ import { auth, signIn, signOut } from "./auth";
 import { supabase } from "./supabase";
 import { getBookings } from "./data-service";
 import { redirect } from "next/navigation";
+import { Booking } from "../_types/types";
 
 export async function signInAction() {
   return await signIn("google", { redirectTo: "/account" });
@@ -44,7 +45,7 @@ export default async function updateGuest(formData: FormData) {
   }
 }
 
-export async function deleteReservation(bookingId: string) {
+export async function deleteBooking(bookingId: string) {
   const session = await auth();
   if (!session) throw new Error("Please login first!");
 
@@ -65,7 +66,7 @@ export async function deleteReservation(bookingId: string) {
   if (error) throw new Error("Something went wrong deleting booking!");
 }
 
-export async function updateReservation(bookingId: string, formData: FormData) {
+export async function updateBooking(bookingId: string, formData: FormData) {
   const session = await auth();
 
   if (!session) throw new Error("Please login first!");
@@ -78,7 +79,7 @@ export async function updateReservation(bookingId: string, formData: FormData) {
     throw new Error("'403' Access denied!");
 
   const numGuests = formData.get("numGuests");
-  const observations = formData.get("observations");
+  const observations = formData.get("observations")?.slice(0, 1000);
 
   const updatedFields = { numGuests, observations };
 
@@ -96,4 +97,27 @@ export async function updateReservation(bookingId: string, formData: FormData) {
   revalidatePath("/account/reservations");
 
   redirect("/account/reservations");
+}
+
+export async function createBooking(bookingData: Booking, formData: FormData) {
+  const session = await auth();
+
+  if (!session) throw new Error("Please login first!");
+
+  const newBooking = {
+    ...bookingData,
+    numGuests: Number(formData.get("numGuests")),
+    observations: formData.get("observations")?.slice(0, 1000),
+    hasBreakfast: false,
+    isPaid: false,
+    status: "unconfirmed",
+    extrasPrice: 0,
+    guestId: session.user?.id,
+  };
+
+  const { error } = await supabase.from("bookings").insert([newBooking]);
+
+  if (error) throw new Error("Something went wrong booking the cabin! ");
+
+  revalidatePath(`/cabins/${bookingData.cabinId}`);
 }
