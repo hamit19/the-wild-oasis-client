@@ -21,7 +21,7 @@ export default function ({ cabin }: { cabin: Cabin }) {
         </h3>
 
         <p className="text-lg text-primary-300 mb-10">
-          <TextExpander>{cabin.description}</TextExpander>
+          <TextExpander text={cabin.description} />
         </p>
 
         <ul className="flex flex-col gap-4 mb-7">
