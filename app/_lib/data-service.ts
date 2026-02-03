@@ -1,14 +1,19 @@
-import { getCountryType, guestType, Settings } from "./../_types/types";
+import {
+  Cabin,
+  CabinPrice,
+  getCountryType,
+  guestType,
+  Settings,
+} from "./../_types/types";
 import { eachDayOfInterval } from "date-fns";
 
 import { supabase } from "./supabase.js";
-import { Cabin } from "../cabins/types.js";
 import { notFound } from "next/navigation";
 import { Booking } from "../_types/types.js";
 
 // GET
 
-export async function getCabin(id: string): Promise<Cabin> {
+export async function getCabin(id?: number): Promise<Cabin> {
   const { data, error } = await supabase
     .from("cabins")
     .select("*")
@@ -22,11 +27,6 @@ export async function getCabin(id: string): Promise<Cabin> {
 
   return data;
 }
-
-type CabinPrice = {
-  regularPrice: number;
-  discount: number;
-};
 
 export async function getCabinPrice(id: number): Promise<CabinPrice | null> {
   const { data, error } = await supabase
@@ -57,7 +57,7 @@ export const getCabins = async function (): Promise<Cabin[]> {
 };
 
 // Guests are uniquely identified by their email address
-export async function getGuest(email: string): Promise<guestType | null> {
+export async function getGuest(email?: string | null): Promise<guestType> {
   const { data, error } = await supabase
     .from("guests")
     .select("*")
@@ -134,8 +134,6 @@ export async function getBookedDatesByCabinId(cabinId: number) {
 export async function getSettings(): Promise<Settings> {
   const { data, error } = await supabase.from("settings").select("*").single();
 
-  console.log(data);
-
   if (error) {
     console.error(error);
     throw new Error("Settings could not be loaded");
@@ -162,22 +160,6 @@ export async function createGuest(newGuest) {
   if (error) {
     console.error(error);
     throw new Error("Guest could not be created");
-  }
-
-  return data;
-}
-
-export async function createBooking(newBooking) {
-  const { data, error } = await supabase
-    .from("bookings")
-    .insert([newBooking])
-    // So that the newly created object gets returned!
-    .select()
-    .single();
-
-  if (error) {
-    console.error(error);
-    throw new Error("Booking could not be created");
   }
 
   return data;

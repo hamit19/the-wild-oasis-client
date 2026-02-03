@@ -9,7 +9,7 @@ interface PageProps {
 }
 
 export async function generateMetadata({ params }: PageProps) {
-  const { name } = await getCabin(params.cabinId);
+  const { name } = await getCabin(Number(params.cabinId));
 
   return {
     title: `Cabin ${name}`,
@@ -23,14 +23,14 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }: PageProps) {
-  const cabin = await getCabin(params.cabinId);
+  const cabin = await getCabin(Number(params.cabinId));
 
   return (
-    <div className='max-w-6xl mx-auto mt-8'>
+    <div className="max-w-6xl mx-auto mt-8">
       <Cabin cabin={cabin} />
 
       <div>
-        <h2 className='text-5xl font-semibold text-center text-accent-500 mb-10'>
+        <h2 className="text-5xl font-semibold text-center text-accent-500 mb-10">
           Reserve {cabin.name} today. Pay on arrival.
         </h2>
         <Suspense fallback={<Spinner />}>

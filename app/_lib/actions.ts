@@ -66,7 +66,7 @@ export async function deleteBooking(bookingId: string) {
   if (error) throw new Error("Something went wrong deleting booking!");
 }
 
-export async function updateBooking(bookingId: string, formData: FormData) {
+export async function updateBooking(bookingId?: string, formData?: FormData) {
   const session = await auth();
 
   if (!session) throw new Error("Please login first!");
@@ -78,8 +78,8 @@ export async function updateBooking(bookingId: string, formData: FormData) {
   if (!guestsBookingIds.includes(Number(bookingId)))
     throw new Error("'403' Access denied!");
 
-  const numGuests = formData.get("numGuests");
-  const observations = formData.get("observations")?.slice(0, 1000);
+  const numGuests = formData?.get("numGuests");
+  const observations = formData?.get("observations")?.slice(0, 1000);
 
   const updatedFields = { numGuests, observations };
 

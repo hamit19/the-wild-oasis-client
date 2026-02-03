@@ -1,8 +1,7 @@
 import React from "react";
 import { getCabins } from "../_lib/data-service";
-import { Cabin } from "../cabins/types";
 import CabinCard from "./CabinCard";
-import { filterType } from "../_types/types";
+import { Cabin, filterType } from "../_types/types";
 
 export default async function CabinList({ filter }: { filter: filterType }) {
   const cabins: Cabin[] = await getCabins();

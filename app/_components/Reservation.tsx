@@ -1,6 +1,6 @@
 import { auth } from "../_lib/auth";
 import { getBookedDatesByCabinId, getSettings } from "../_lib/data-service";
-import { Cabin } from "../cabins/types";
+import { Cabin } from "../_types/types";
 import DateSelector from "./DateSelector";
 import LoginMessage from "./LoginMessage";
 import ReservationForm from "./ReservationForm";
@@ -14,7 +14,7 @@ export default async function ({ cabin }: { cabin: Cabin }) {
   const session = await auth();
 
   return (
-    <div className='grid grid-cols-2 min-h-[400px] border border-primary-800'>
+    <div className="grid grid-cols-2 min-h-[400px] border border-primary-800">
       <DateSelector
         settings={settings}
         bookedDates={bookedDates}

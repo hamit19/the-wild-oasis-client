@@ -8,12 +8,9 @@ export default async function Page({
 }) {
   const { bookingId } = params;
 
-  // const [booking, cabin] = await Promise.all([
-  //   getBooking(bookingId),
-  //   getCabin(bookingId),
-  // ]);
-
-  const { numGuests, observations, cabinId } = await getBooking(bookingId);
+  const { numGuests, observations, cabinId } = await getBooking(
+    Number(bookingId),
+  );
   const cabin = await getCabin(cabinId);
 
   const { maxCapacity } = cabin;

@@ -8,8 +8,8 @@ import {
 } from "date-fns";
 import { DateRange, DayPicker, getDefaultClassNames } from "react-day-picker";
 import "react-day-picker/dist/style.css";
-import { Cabin } from "../cabins/types";
 import { useReservation } from "./ReservationContext";
+import { DateSelectorPropsTypes } from "../_types/types";
 
 function isAlreadyBooked(range: DateRange, datesArr: Date[]) {
   const start = range.from;
@@ -18,15 +18,6 @@ function isAlreadyBooked(range: DateRange, datesArr: Date[]) {
 
   return datesArr.some((date) => isWithinInterval(date, { start, end }));
 }
-
-type DateSelectorPropsTypes = {
-  settings: {
-    minBookingLength: number;
-    maxBookingLength: number;
-  };
-  bookedDates: Date[];
-  cabin: Cabin;
-};
 
 function DateSelector({
   settings,

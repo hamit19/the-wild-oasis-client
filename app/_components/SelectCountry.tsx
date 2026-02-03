@@ -1,13 +1,5 @@
-import { getCountries, getCountryType } from "@/app/_lib/data-service";
-
-// Let's imagine your colleague already built this component 😃
-
-type SelectCountryProps = {
-  defaultCountry: string;
-  name: string;
-  id: string;
-  className: string;
-};
+import { getCountries } from "@/app/_lib/data-service";
+import { getCountryType, SelectCountryProps } from "../_types/types";
 
 async function SelectCountry({
   defaultCountry,

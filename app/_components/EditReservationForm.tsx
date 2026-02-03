@@ -1,14 +1,8 @@
 "use client";
 
 import { updateBooking } from "../_lib/actions";
+import { EditReservationFormProps } from "../_types/types";
 import SubmitButton from "./SubmitButton";
-
-type EditReservationFormProps = {
-  maxCapacity: number;
-  bookingId: string;
-  numGuests: number;
-  observations: string;
-};
 
 export default function EditReservationForm({
   maxCapacity,
