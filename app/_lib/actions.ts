@@ -120,4 +120,5 @@ export async function createBooking(bookingData: Booking, formData: FormData) {
   if (error) throw new Error("Something went wrong booking the cabin! ");
 
   revalidatePath(`/cabins/${bookingData.cabinId}`);
+  redirect("/cabins/thankyou");
 }
