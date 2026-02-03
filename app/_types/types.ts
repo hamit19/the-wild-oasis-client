@@ -28,8 +28,9 @@ export interface ReservationCardProps {
   onDelete: (bookingId: string) => void;
 }
 
-export interface ReservationDeleteProps extends ReservationCardProps {
+export interface ReservationDeleteProps {
   bookingId: string;
+  onDelete: (bookingId: string) => void;
 }
 
 export type getCountryType = {

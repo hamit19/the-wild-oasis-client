@@ -29,11 +29,13 @@ export default function EditReservationForm({
           <option value="" key="">
             Select number of guests...
           </option>
-          {Array.from({ length: maxCapacity }, (_, i) => i + 1).map((x) => (
-            <option value={x} key={x}>
-              {x} {x === 1 ? "guest" : "guests"}
-            </option>
-          ))}
+          {Array.from({ length: maxCapacity || 0 }, (_, i) => i + 1).map(
+            (x) => (
+              <option value={x} key={x}>
+                {x} {x === 1 ? "guest" : "guests"}
+              </option>
+            ),
+          )}
         </select>
       </div>
 

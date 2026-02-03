@@ -5,8 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { ReservationCardProps } from "../_types/types";
 
-export const formatDistanceFromNow = (dateStr: string) =>
-  formatDistance(parseISO(dateStr), new Date(), {
+export const formatDistanceFromNow = (dateStr: Date | "") =>
+  formatDistance(parseISO(String(dateStr)), new Date(), {
     addSuffix: true,
   }).replace("about ", "");
 
@@ -19,10 +19,13 @@ function ReservationCard({ booking, onDelete }: ReservationCardProps) {
     numNights,
     totalPrice,
     numGuests = 0,
-    status,
     created_at = "",
-    cabins: { name, image },
+    cabins,
   } = booking;
+
+  const { name = "", image = "" } = Array.isArray(cabins)
+    ? (cabins[0] ?? {})
+    : (cabins ?? {});
 
   return (
     <div className="flex border border-primary-800">
