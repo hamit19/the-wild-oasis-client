@@ -1,12 +1,12 @@
 "use client";
 
 import { User } from "next-auth";
-import { Cabin } from "../cabins/types";
 import { useReservation } from "./ReservationContext";
 import Image from "next/image";
 import { differenceInDays } from "date-fns";
 import { createBooking } from "../_lib/actions";
 import SubmitButton from "./SubmitButton";
+import { Cabin } from "../_types/types";
 
 type ReservationFormProps = {
   cabin: Cabin;

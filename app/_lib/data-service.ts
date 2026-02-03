@@ -3,6 +3,7 @@ import {
   CabinPrice,
   getCountryType,
   guestType,
+  newGuestType,
   Settings,
 } from "./../_types/types";
 import { eachDayOfInterval } from "date-fns";
@@ -154,7 +155,7 @@ export async function getCountries(): Promise<getCountryType[]> {
   }
 }
 
-export async function createGuest(newGuest) {
+export async function createGuest(newGuest: newGuestType) {
   const { data, error } = await supabase.from("guests").insert([newGuest]);
 
   if (error) {

@@ -1,7 +1,7 @@
 export type filterType = "small" | "medium" | "large" | "all";
 
 export type guestType = {
-  guestId: string;
+  id?: string;
   nationality: string;
   nationalID: string;
   countryFlag: string;
@@ -84,4 +84,9 @@ export type SelectCountryProps = {
   name: string;
   id: string;
   className: string;
+};
+
+export type newGuestType = {
+  email?: string | null;
+  fullName?: string | null;
 };

@@ -19,9 +19,11 @@ export default async function updateGuest(formData: FormData) {
   const session = await auth();
 
   const nationalID = formData.get("nationalID");
-  const [nationality, countryFlag] = formData?.get("nationality")?.split("%");
+  const [nationality, countryFlag] = String(
+    formData?.get("nationality"),
+  )?.split("%");
 
-  if (!/^[a-zA-Z0-9]{6,12}$/.test(nationalID))
+  if (!/^[a-zA-Z0-9]{6,12}$/.test(nationalID as string))
     throw new Error("invalid nationalID!");
 
   if (!session) throw new Error("Please login first!");
