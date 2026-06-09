@@ -258,4 +258,4 @@ If you have any questions or suggestions, feel free to reach out or open an issu
 
 **Built with ❤️ by Hamid Hassani**
 
-[Portfolio](https://yourportfolio.com) | [LinkedIn](www.linkedin.com/in/hamid-hassani-a431b0244)
+[Portfolio](https://yourportfolio.com) | [LinkedIn](https://www.linkedin.com/in/hamid-hassani-a431b0244)
